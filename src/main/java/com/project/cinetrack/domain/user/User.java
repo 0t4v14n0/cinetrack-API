@@ -21,8 +21,8 @@ import jakarta.persistence.Table;
 @Table(name = "user")
 @Entity(name = "User")
 public class User implements UserDetails{
-	
-	private static long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +41,21 @@ public class User implements UserDetails{
 	private String phone_number;
 	private String bio;
 	private LocalDateTime last_login;
+	
+	public User() {}
+	
+	public User(DataRegisterUser data){
+		this.name = data.name();
+		this.email = data.email();
+		this.password = data.password();
+		this.phone_number = data.phone_number();
+		this.bio = data.bio();
+		this.avatar_url = data.avatar_url();
+		this.created_at = LocalDateTime.now();
+		this.role = Role.user;
+		this.status = Status.active;
+		this.updated_at = LocalDateTime.now();
+	}
 	
 	public Long getId() {
 		return id;
@@ -70,12 +85,8 @@ public class User implements UserDetails{
 		this.password = password;
 	}
 	
-    public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public static void setSerialversionuid(long serialversionuid) {
-		serialVersionUID = serialversionuid;
+	public String getPassworde() {
+		return password;
 	}
 
 	public Status getStatus() {
@@ -149,7 +160,7 @@ public class User implements UserDetails{
 
     @Override
     public String getPassword() {
-        return getPassword();
+        return password;
     }
 
     @Override
