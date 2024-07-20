@@ -10,6 +10,13 @@ public class UserService {
 	@Autowired
     private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private UserRepository repository;
+	
+	public DataDeteilsUser userDeteils(String name) {
+		return repository.findDataDetailsByName(name);
+	}
+	
     public String passwordCrypt(String password) {
     	String psswordEncrypted = passwordEncoder.encode(password);
 		return psswordEncrypted;
