@@ -33,11 +33,8 @@ public class AuthenticationController {
     public ResponseEntity<?> login(@RequestBody @Valid DataAutenticationUser data, UriComponentsBuilder uriBuilder) {
     	
         var authenticationToken = new UsernamePasswordAuthenticationToken(data.email(), data.password());
-        System.out.println(authenticationToken);
         var authentication = manager.authenticate(authenticationToken);   
         var tokenJWT = tokenService.gerarToken((User)authentication.getPrincipal());   
-        return ResponseEntity.ok(new TokenDataJWT(tokenJWT));
-        
+        return ResponseEntity.ok(new TokenDataJWT(tokenJWT));    
     }
-
 }

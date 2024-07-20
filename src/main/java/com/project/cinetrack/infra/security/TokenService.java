@@ -4,10 +4,12 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.project.cinetrack.domain.user.User;
+import com.project.cinetrack.domain.user.UserRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -16,10 +18,16 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 @Service
 public class TokenService {
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	@Value("${secret}")
 	private String secret;
 		
-	    public String gerarToken(User user) { 
+	    public String gerarToken(User user) {
+	    	
+	    	user.setLast_login(LocalDateTime.now());
+	        userRepository.save(user);
 	    	
 	        try {
 	            var algoritmo = Algorithm.HMAC256(secret);
