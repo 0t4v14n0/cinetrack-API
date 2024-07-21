@@ -40,9 +40,9 @@ public class UserController {
 	
 	@DeleteMapping
 	@Transactional
-	public ResponseEntity disaleUser() {
-		
-		return null;
+	public ResponseEntity<Integer> disableUser(Authentication authentication) {
+		userService.disableUser(authentication.getName());
+		return ResponseEntity.ok(200);
 	}
 
 }

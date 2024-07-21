@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.project.cinetrack.domain.user.Status;
 import com.project.cinetrack.domain.user.User;
 import com.project.cinetrack.domain.user.UserRepository;
 import com.auth0.jwt.JWT;
@@ -27,6 +28,7 @@ public class TokenService {
 	    public String gerarToken(User user) {
 	    	
 	    	user.setLast_login(LocalDateTime.now());
+	    	user.setStatus(Status.active);
 	        userRepository.save(user);
 	    	
 	        try {

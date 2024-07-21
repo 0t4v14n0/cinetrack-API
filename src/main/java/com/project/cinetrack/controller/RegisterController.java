@@ -30,13 +30,11 @@ public class RegisterController {
     @PostMapping
     @Transactional
     public ResponseEntity<DataDeteilsUser> register(@RequestBody @Valid DataRegisterUser data, UriComponentsBuilder uriBuilder ) {	
-    	
     	var user = new User(data);	
     	user.setPassword(userService.passwordCrypt(data.password()));   	
     	repository.save(user);    	
     	var uri = uriBuilder.path("").buildAndExpand(user.getId()).toUri();
-    	return ResponseEntity.created(uri).body(new DataDeteilsUser(user));	
-    	
+    	return ResponseEntity.created(uri).body(new DataDeteilsUser(user));		
     }
 
 }

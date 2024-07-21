@@ -15,13 +15,9 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 	
-	public DataDeteilsUser userDeteils(String name) {
-		return repository.findDataDetailsByName(name);
-	}
-	
 	public DataDeteilsUser updateUser(DataUpdateUser data, String name) {
 		
-		User user = (User) repository.findByEmail(name);
+		User user = findByNome(name);
 		
 		if(data.name() != null && !data.name().isEmpty()) user.setName(data.name());
 		if(data.password() != null && !data.password().isEmpty()) user.setPassword(passwordCrypt(data.password()));
@@ -34,6 +30,20 @@ public class UserService {
 		repository.save(user);
 		
 		return new DataDeteilsUser(user);
+	}
+	
+	public DataDeteilsUser userDeteils(String name) {
+		return repository.findDataDetailsByName(name);
+	}
+	
+	public void disableUser(String name) {	
+		User user = findByNome(name);
+		user.setStatus(Status.disabled);
+		repository.save(user);
+	}
+	
+	public User findByNome(String name) {
+		return (User) repository.findByEmail(name);
 	}
 	
     public String passwordCrypt(String password) {
