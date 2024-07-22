@@ -1,4 +1,4 @@
-package com.project.cinetrack.domain.movie;
+package com.project.cinetrack.domain.media.movie;
 
 public enum Gender {
 	

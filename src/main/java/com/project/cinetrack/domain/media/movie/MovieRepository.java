@@ -1,4 +1,4 @@
-package com.project.cinetrack.domain.movie;
+package com.project.cinetrack.domain.media.movie;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
