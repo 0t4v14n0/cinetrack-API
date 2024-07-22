@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 	
-  //@Query("SELECT u FROM User u WHERE u.name = ?1 AND u.status != 'disabled'")
 	@Query("SELECT new com.project.cinetrack.domain.user.DataDeteilsUser("
 			+ "u.id,"
 	        + "u.name,"

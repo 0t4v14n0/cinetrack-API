@@ -8,6 +8,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class APIomdb {
 	
 	private static final String BASE_URL = "https://www.omdbapi.com/?t=";
