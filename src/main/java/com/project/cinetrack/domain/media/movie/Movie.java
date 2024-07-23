@@ -2,12 +2,16 @@ package com.project.cinetrack.domain.media.movie;
 
 import java.sql.Date;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Table(name = "movie")
+@Entity(name = "Movie")
 public class Movie {
 	
 	@Id

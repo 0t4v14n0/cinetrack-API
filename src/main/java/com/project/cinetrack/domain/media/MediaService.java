@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.project.cinetrack.domain.media.dto.EpisodeDetailsResponse;
 import com.project.cinetrack.domain.media.dto.SeasonDetailsResponse;
 import com.project.cinetrack.domain.media.dto.TitleDetailsResponse;
+import com.project.cinetrack.domain.media.serie.Episode;
 
 @Service
 public class MediaService {
@@ -18,7 +19,13 @@ public class MediaService {
 	}
 
 	public EpisodeDetailsResponse EpisodeDetails(String title, Integer season, Integer episode) {
-		return new EpisodeDetailsResponse();
+		
+		//consulta no bd, se retorna null consulta e grava no bd;
+		
+		
+		Episode episode1 = new Episode();
+		
+		return new EpisodeDetailsResponse(episode1);
 	}
 
 }
