@@ -1,9 +1,9 @@
-package com.project.cinetrack.domain.review;
+package com.project.cinetrack.domain.media.serie;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Review, Long>{
+public interface SerieRepository extends JpaRepository<Serie, Long>{
 
 }
