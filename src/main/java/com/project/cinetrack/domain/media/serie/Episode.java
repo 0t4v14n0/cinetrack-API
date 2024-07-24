@@ -2,10 +2,19 @@ package com.project.cinetrack.domain.media.serie;
 
 import java.sql.Date;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Table(name = "episode")
+@Entity
 public class Episode {
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
 	private String plot;
@@ -98,5 +107,7 @@ public class Episode {
 	public void setSerie(Serie serie) {
 		this.serie = serie;
 	}
-	
+    
+    
+
 }
