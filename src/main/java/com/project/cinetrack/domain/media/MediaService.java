@@ -32,7 +32,7 @@ public class MediaService {
     	Episode episode1 = episodeService.searchEpisode(title,season,episode);
     	
     	if (episode1 == null) {
-    		return null;
+    		//return new EpisodeDetailsResponse(externService.searchOMDb(title, season, episode));
     	}
     	return new EpisodeDetailsResponse(episode1);
 
