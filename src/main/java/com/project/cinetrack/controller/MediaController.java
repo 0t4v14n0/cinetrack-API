@@ -25,13 +25,13 @@ public class MediaController {
             							@RequestParam(name = "episode", required = false) Integer episode){
 		
         if (season == null && episode == null) {
-            TitleDetailsResponse response = mediaService.TitleDetails(title);
+            TitleDetailsResponse response = mediaService.titleDetails(title);
             return ResponseEntity.ok(response);
         } else if (season != null && episode == null) {
-            SeasonDetailsResponse response = mediaService.SeasonDetails(title, season);
+            SeasonDetailsResponse response = mediaService.seasonDetails(title, season);
             return ResponseEntity.ok(response);
         } else if (season != null && episode != null) {
-            EpisodeDetailsResponse response = mediaService.EpisodeDetails(title, season, episode);
+            EpisodeDetailsResponse response = mediaService.episodeDetails(title, season, episode);
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.badRequest().body("Invalid parameters");

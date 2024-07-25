@@ -1,4 +1,6 @@
-package com.project.cinetrack.domain.user;
+package com.project.cinetrack.domain.user.dto;
+
+import com.project.cinetrack.domain.user.User;
 
 public record DataDeteilsUser(
         Long id,

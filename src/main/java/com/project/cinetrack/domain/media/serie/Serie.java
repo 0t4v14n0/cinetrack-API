@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.project.cinetrack.domain.media.movie.Gender;
 import com.project.cinetrack.domain.user.User;
 
 import jakarta.persistence.CascadeType;
@@ -21,25 +22,26 @@ import jakarta.persistence.Table;
 @Entity
 public class Serie {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String title;
-	private String plot;
-	private int totalSeason;
-	private int episodeNumber;
-	private Date releaseDate;
+    private Long id;
+    private String title;
+    private String plot;
+    private int totalSeason;
+    private int episodeNumber;
+    private Date releaseDate;
+    private Gender gender;
     private double rating;
     private int votes;
     private int runtime;
-	private String poster;
-	
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
-	
-	@OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Episode> episodios = new ArrayList<>();
+    private String poster;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Season> seasons = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -89,6 +91,14 @@ public class Serie {
 		this.releaseDate = releaseDate;
 	}
 
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
 	public double getRating() {
 		return rating;
 	}
@@ -121,14 +131,21 @@ public class Serie {
 		this.poster = poster;
 	}
 
-	public List<Episode> getEpisodios() {
-		return episodios;
+	public User getUser() {
+		return user;
 	}
 
-	public void setEpisodios(List<Episode> episodios) {
-		this.episodios = episodios;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	
-	
 
+	public List<Season> getSeasons() {
+		return seasons;
+	}
+
+	public void setSeasons(List<Season> seasons) {
+		this.seasons = seasons;
+	}
+    
+    
 }

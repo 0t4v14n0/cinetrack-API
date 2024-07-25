@@ -1,4 +1,3 @@
--- Tabela user
 CREATE TABLE user (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
@@ -11,10 +10,10 @@ CREATE TABLE user (
     avatar_url VARCHAR(255),
     phone_number VARCHAR(20),
     bio TEXT,
-    last_login TIMESTAMP
+    last_login TIMESTAMP,
+    INDEX idx_user_status (status)
 );
 
--- Tabela movie
 CREATE TABLE movie (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255),
@@ -27,10 +26,11 @@ CREATE TABLE movie (
     synopsis TEXT,
     poster VARCHAR(255),
     user_id BIGINT,
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    INDEX idx_movie_title (title),
+    INDEX idx_movie_gender (gender)
 );
 
--- Tabela serie
 CREATE TABLE serie (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255),
@@ -38,30 +38,42 @@ CREATE TABLE serie (
     total_season INT,
     episode_number INT,
     release_date DATE,
+    gender ENUM('ACTION', 'COMEDY', 'DRAMA', 'FANTASY', 'HORROR', 'MYSTERY', 'ROMANCE', 'THRILLER'),
     rating DOUBLE,
     votes INT,
     runtime INT,
     poster VARCHAR(255),
     user_id BIGINT,
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    INDEX idx_serie_title (title),
+    INDEX idx_serie_gender (gender)
 );
 
--- Tabela episode
+CREATE TABLE season (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    serie_id BIGINT,
+    season_number INT,
+    total_episodes INT,
+    release_date DATE,
+    FOREIGN KEY (serie_id) REFERENCES serie(id),
+    INDEX idx_season_serie (serie_id)
+);
+
 CREATE TABLE episode (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    season_id BIGINT,
     title VARCHAR(255),
     plot TEXT,
     episode_number INT,
-    season_number INT,
     release_date DATE,
     rating DOUBLE,
     votes INT,
     runtime INT,
-    serie_id BIGINT,
-    FOREIGN KEY (serie_id) REFERENCES serie(id)
+    FOREIGN KEY (season_id) REFERENCES season(id),
+    INDEX idx_episode_season (season_id),
+    INDEX idx_episode_title (title)
 );
 
--- Tabela review
 CREATE TABLE review (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT,
@@ -74,5 +86,6 @@ CREATE TABLE review (
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (movie_id) REFERENCES movie(id),
     FOREIGN KEY (serie_id) REFERENCES serie(id),
-    FOREIGN KEY (episode_id) REFERENCES episode(id)
+    FOREIGN KEY (episode_id) REFERENCES episode(id),
+    INDEX idx_review_user (user_id)
 );

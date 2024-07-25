@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.project.cinetrack.domain.user.DataAutenticationUser;
 import com.project.cinetrack.domain.user.User;
+import com.project.cinetrack.domain.user.dto.DataAutenticationUser;
 import com.project.cinetrack.infra.security.TokenDataJWT;
 import com.project.cinetrack.infra.security.TokenService;
 

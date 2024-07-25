@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.project.cinetrack.domain.user.DataDeteilsUser;
-import com.project.cinetrack.domain.user.DataRegisterUser;
 import com.project.cinetrack.domain.user.User;
 import com.project.cinetrack.domain.user.UserRepository;
 import com.project.cinetrack.domain.user.UserService;
+import com.project.cinetrack.domain.user.dto.DataDeteilsUser;
+import com.project.cinetrack.domain.user.dto.DataRegisterUser;
 
 import jakarta.validation.Valid;
 

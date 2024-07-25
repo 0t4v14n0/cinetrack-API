@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.Authentication;
 
-import com.project.cinetrack.domain.user.DataDeteilsUser;
-import com.project.cinetrack.domain.user.DataUpdateUser;
 import com.project.cinetrack.domain.user.UserService;
+import com.project.cinetrack.domain.user.dto.DataDeteilsUser;
+import com.project.cinetrack.domain.user.dto.DataUpdateUser;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

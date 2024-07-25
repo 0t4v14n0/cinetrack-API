@@ -13,20 +13,19 @@ import jakarta.persistence.Table;
 @Entity
 public class Episode {
 	
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String title;
-	private String plot;
-	private int episodeNumber;
-	private int seasonNumber;
-	private Date releaseDate;
+    private Long id;
+    private String title;
+    private String plot;
+    private int episodeNumber;
+    private Date releaseDate;
     private double rating;
     private int votes;
     private int runtime;
-    
+
     @ManyToOne
-    private Serie serie;
+    private Season season;
 
 	public Long getId() {
 		return id;
@@ -58,14 +57,6 @@ public class Episode {
 
 	public void setEpisodeNumber(int episodeNumber) {
 		this.episodeNumber = episodeNumber;
-	}
-
-	public int getSeasonNumber() {
-		return seasonNumber;
-	}
-
-	public void setSeasonNumber(int seasonNumber) {
-		this.seasonNumber = seasonNumber;
 	}
 
 	public Date getReleaseDate() {
@@ -100,14 +91,12 @@ public class Episode {
 		this.runtime = runtime;
 	}
 
-	public Serie getSerie() {
-		return serie;
+	public Season getSeason() {
+		return season;
 	}
 
-	public void setSerie(Serie serie) {
-		this.serie = serie;
+	public void setSeason(Season season) {
+		this.season = season;
 	}
     
-    
-
 }

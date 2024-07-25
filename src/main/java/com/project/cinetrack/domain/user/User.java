@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.project.cinetrack.domain.media.movie.Movie;
 import com.project.cinetrack.domain.media.serie.Serie;
+import com.project.cinetrack.domain.user.dto.DataRegisterUser;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

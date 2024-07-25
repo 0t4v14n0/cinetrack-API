@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.project.cinetrack.domain.user.dto.DataDeteilsUser;
+import com.project.cinetrack.domain.user.dto.DataUpdateUser;
+
 @Service
 public class UserService {
 	
@@ -33,7 +36,7 @@ public class UserService {
 	}
 	
 	public DataDeteilsUser userDeteils(String name) {
-		return repository.findDataDetailsByName(name);
+		return  repository.findDataDetailsByName(name);
 	}
 	
 	public void disableUser(String name) {	
