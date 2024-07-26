@@ -8,4 +8,6 @@ import com.project.cinetrack.domain.media.serie.Serie;
 @Repository
 public interface SerieRepository extends JpaRepository<Serie, Long>{
 	
+	Serie findByTitle(String title);
+	
 }

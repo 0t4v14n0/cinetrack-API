@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class APIomdb {
 	
 	private static final String BASE_URL = "https://www.omdbapi.com/?t=";
-	private static final String apiKey = "API-KEY";
+	private static final String apiKey = "&apikey=c16acd6a";
     
     public String busca(String nome,String temporada,String episodio) throws IOException, InterruptedException { 
 

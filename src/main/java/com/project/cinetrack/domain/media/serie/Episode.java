@@ -1,11 +1,12 @@
 package com.project.cinetrack.domain.media.serie;
 
-import java.sql.Date;
+import com.project.cinetrack.domain.extern.dto.DataEpisode;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -19,13 +20,80 @@ public class Episode {
     private String title;
     private String plot;
     private int episodeNumber;
-    private Date releaseDate;
+    private String releaseDate;
     private double rating;
     private int votes;
     private int runtime;
 
     @ManyToOne
+    @JoinColumn(name = "season_id", nullable = false)
     private Season season;
+    
+    public Episode(){  	
+    }
+    
+    public Episode(DataEpisode dataEpisode, Season season) {
+    	
+    	try {
+    		
+        	this.title = dataEpisode.title();
+
+    	}catch(Exception e) {
+        	this.title = "";
+    	}
+    	
+    	try {
+    		
+        	this.plot = dataEpisode.plot();
+
+    	}catch(Exception e) {
+        	this.plot = "";
+    	}
+    	
+    	try {
+    		
+        	this.episodeNumber = Integer.parseInt(dataEpisode.episodeNumber());
+        	
+    	}catch(Exception e) {
+        	this.episodeNumber = 0;
+    	}
+    	try {
+    		
+        	this.releaseDate = dataEpisode.releaseDate();
+
+    	}catch(Exception e) {
+        	this.releaseDate = "";
+    	}
+    	try {
+    		
+        	this.rating = Double.parseDouble(dataEpisode.rating());
+
+    	}catch(Exception e) {
+        	this.rating = 0;
+
+    	}
+    	try {
+        	this.votes = Integer.parseInt(dataEpisode.votes());
+
+    	}catch(Exception e) {
+        	this.votes = 0;
+    	}
+    	try {
+    		
+        	this.runtime = Integer.parseInt(dataEpisode.runtime());
+
+    	}catch(Exception e) {
+    		
+        	this.runtime = 0;
+
+    	}
+    	try {
+        	this.season = season;
+    	}catch(Exception e) {
+    		
+    	}
+    	
+    }
 
 	public Long getId() {
 		return id;
@@ -59,11 +127,11 @@ public class Episode {
 		this.episodeNumber = episodeNumber;
 	}
 
-	public Date getReleaseDate() {
+	public String getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 

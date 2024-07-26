@@ -1,9 +1,9 @@
 package com.project.cinetrack.domain.media.serie;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.project.cinetrack.domain.extern.dto.DataSerie;
 import com.project.cinetrack.domain.media.movie.Gender;
 import com.project.cinetrack.domain.user.User;
 
@@ -26,10 +26,12 @@ public class Serie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    private String year;
     private String plot;
     private int totalSeason;
     private int episodeNumber;
-    private Date releaseDate;
+    private String releaseDate;
+    @JoinColumn()
     private Gender gender;
     private double rating;
     private int votes;
@@ -42,6 +44,43 @@ public class Serie {
 
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Season> seasons = new ArrayList<>();
+    
+    public Serie () {	
+    }
+    
+    public Serie(DataSerie dataSerie) {
+        this.title = dataSerie.titulo();
+        try {
+        	this.year = dataSerie.year();
+        }catch(Exception e) {
+        	this.year = "";
+        }
+        this.plot = dataSerie.plot();
+        try {
+            this.totalSeason = Integer.parseInt(dataSerie.totalSeason());
+        }catch(Exception e) {
+            this.totalSeason = 0;
+        }
+        this.releaseDate = dataSerie.releaseDate();
+        try {
+            this.gender = Gender.valueOf(dataSerie.gender().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid gender value: " + dataSerie.gender());
+            this.gender = Gender.UNKNOWN; 
+        }        
+        this.rating = Double.parseDouble(dataSerie.rating());
+        try {
+            this.votes = Integer.parseInt(dataSerie.votes());
+        }catch(Exception e) {
+            this.votes = 0;
+        }
+        try {
+            this.runtime = Integer.parseInt(dataSerie.runtime());
+        }catch(Exception e) {
+            this.runtime = 0;
+        }
+        this.poster = dataSerie.poster();
+    }
 
 	public Long getId() {
 		return id;
@@ -57,6 +96,14 @@ public class Serie {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
 	}
 
 	public String getPlot() {
@@ -83,11 +130,11 @@ public class Serie {
 		this.episodeNumber = episodeNumber;
 	}
 
-	public Date getReleaseDate() {
+	public String getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
@@ -146,6 +193,5 @@ public class Serie {
 	public void setSeasons(List<Season> seasons) {
 		this.seasons = seasons;
 	}
-    
-    
+        
 }

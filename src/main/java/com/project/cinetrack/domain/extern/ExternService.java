@@ -11,9 +11,9 @@ public class ExternService {
 	@Autowired
 	private APIomdb omdbb;
 	
-    public String searchOMDb(String title, Integer season, Integer episode) throws IOException, InterruptedException {
+    public String searchOMDb(String title, String string, String string2) throws IOException, InterruptedException {
     	
-    	String json = omdbb.busca(title, ""+season, ""+episode);
+    	String json = omdbb.busca(title, string, string2);
 
 		return json;   	
     }

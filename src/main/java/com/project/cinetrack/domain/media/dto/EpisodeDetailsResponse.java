@@ -1,15 +1,14 @@
 package com.project.cinetrack.domain.media.dto;
 
-import java.sql.Date;
-
 import com.project.cinetrack.domain.media.serie.Episode;
 
 public record EpisodeDetailsResponse(String title,
 									String plot,	
 									int episodeNumber,
-									Date releaseDate,
+									String releaseDate,
 									double rating,
-									int votes) {
+									int votes,
+									int runtime) {
 
 	public EpisodeDetailsResponse(Episode episode) {
 		this(episode.getTitle(),
@@ -17,7 +16,8 @@ public record EpisodeDetailsResponse(String title,
 			episode.getEpisodeNumber(),
 			episode.getReleaseDate(),
 			episode.getRating(),
-			episode.getVotes());
+			episode.getVotes(),
+			episode.getRuntime());
 	}
 
 }

@@ -9,5 +9,6 @@ public enum Gender {
 	HORROR,
 	MYSTERY,
 	ROMANCE,
-	THRILLER
+	THRILLER,
+	UNKNOWN
 }

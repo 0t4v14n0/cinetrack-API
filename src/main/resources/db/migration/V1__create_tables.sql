@@ -17,10 +17,10 @@ CREATE TABLE user (
 CREATE TABLE movie (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255),
-    year YEAR,
-    data DATE,
+    year INT,
+    data VARCHAR(255),
     note DOUBLE,
-    gender ENUM('ACTION', 'COMEDY', 'DRAMA', 'FANTASY', 'HORROR', 'MYSTERY', 'ROMANCE', 'THRILLER'),
+    gender ENUM('ACTION', 'COMEDY', 'DRAMA', 'FANTASY', 'HORROR', 'MYSTERY', 'ROMANCE', 'THRILLER','UNKNOWN'),
     director VARCHAR(255),
     actor VARCHAR(255),
     synopsis TEXT,
@@ -34,11 +34,12 @@ CREATE TABLE movie (
 CREATE TABLE serie (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255),
+    year VARCHAR(255),
     plot TEXT,
     total_season INT,
     episode_number INT,
-    release_date DATE,
-    gender ENUM('ACTION', 'COMEDY', 'DRAMA', 'FANTASY', 'HORROR', 'MYSTERY', 'ROMANCE', 'THRILLER'),
+    release_date VARCHAR(255),
+    gender ENUM('ACTION', 'COMEDY', 'DRAMA', 'FANTASY', 'HORROR', 'MYSTERY', 'ROMANCE', 'THRILLER','UNKNOWN'),
     rating DOUBLE,
     votes INT,
     runtime INT,
@@ -51,27 +52,23 @@ CREATE TABLE serie (
 
 CREATE TABLE season (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    serie_id BIGINT,
-    season_number INT,
-    total_episodes INT,
-    release_date DATE,
-    FOREIGN KEY (serie_id) REFERENCES serie(id),
-    INDEX idx_season_serie (serie_id)
+    season_number INT NOT NULL,
+    total_season INT NOT NULL,
+    serie_id BIGINT NOT NULL,
+    FOREIGN KEY (serie_id) REFERENCES serie(id) ON DELETE CASCADE
 );
 
 CREATE TABLE episode (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    season_id BIGINT,
-    title VARCHAR(255),
+    title VARCHAR(255) NOT NULL,
     plot TEXT,
-    episode_number INT,
-    release_date DATE,
+    episode_number INT NOT NULL,
+    release_date VARCHAR(50),
     rating DOUBLE,
     votes INT,
     runtime INT,
-    FOREIGN KEY (season_id) REFERENCES season(id),
-    INDEX idx_episode_season (season_id),
-    INDEX idx_episode_title (title)
+    season_id BIGINT NOT NULL,
+    FOREIGN KEY (season_id) REFERENCES season(id) ON DELETE CASCADE
 );
 
 CREATE TABLE review (
@@ -82,10 +79,26 @@ CREATE TABLE review (
     episode_id BIGINT,
     rating DOUBLE,
     review_text TEXT,
-    created_at DATETIME,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (movie_id) REFERENCES movie(id),
     FOREIGN KEY (serie_id) REFERENCES serie(id),
     FOREIGN KEY (episode_id) REFERENCES episode(id),
     INDEX idx_review_user (user_id)
+);
+
+CREATE TABLE favorite_series (
+    user_id BIGINT,
+    serie_id BIGINT,
+    PRIMARY KEY (user_id, serie_id),
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (serie_id) REFERENCES serie(id)
+);
+
+CREATE TABLE favorite_movie (
+    user_id BIGINT,
+    movie_id BIGINT,
+    PRIMARY KEY (user_id, movie_id),
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (movie_id) REFERENCES movie(id)
 );
