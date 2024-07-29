@@ -9,6 +9,8 @@ import com.project.cinetrack.domain.user.User;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,7 +33,7 @@ public class Serie {
     private int totalSeason;
     private int episodeNumber;
     private String releaseDate;
-    @JoinColumn()
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     private double rating;
     private int votes;
@@ -45,38 +47,40 @@ public class Serie {
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Season> seasons = new ArrayList<>();
     
-    public Serie () {	
-    }
+    public Serie () {}
     
     public Serie(DataSerie dataSerie) {
         this.title = dataSerie.titulo();
         try {
-        	this.year = dataSerie.year();
-        }catch(Exception e) {
-        	this.year = "";
+            this.year = dataSerie.year();
+        } catch (Exception e) {
+            this.year = "";
         }
         this.plot = dataSerie.plot();
         try {
             this.totalSeason = Integer.parseInt(dataSerie.totalSeason());
-        }catch(Exception e) {
+        } catch (Exception e) {
             this.totalSeason = 0;
         }
         this.releaseDate = dataSerie.releaseDate();
         try {
-            this.gender = Gender.valueOf(dataSerie.gender().toUpperCase());
+            if (dataSerie.gender() == null || dataSerie.gender().trim().isEmpty()) {
+                this.gender = Gender.UNKNOWN;
+            } else {
+                this.gender = Gender.fromString(dataSerie.gender().trim());
+            }
         } catch (IllegalArgumentException e) {
-            System.err.println("Invalid gender value: " + dataSerie.gender());
-            this.gender = Gender.UNKNOWN; 
-        }        
+            this.gender = Gender.UNKNOWN;
+        }
         this.rating = Double.parseDouble(dataSerie.rating());
         try {
             this.votes = Integer.parseInt(dataSerie.votes());
-        }catch(Exception e) {
+        } catch (Exception e) {
             this.votes = 0;
         }
         try {
             this.runtime = Integer.parseInt(dataSerie.runtime());
-        }catch(Exception e) {
+        } catch (Exception e) {
             this.runtime = 0;
         }
         this.poster = dataSerie.poster();

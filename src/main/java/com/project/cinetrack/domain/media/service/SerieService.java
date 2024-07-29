@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.project.cinetrack.domain.extern.DataConverter;
@@ -12,6 +14,7 @@ import com.project.cinetrack.domain.extern.dto.DataEpisode;
 import com.project.cinetrack.domain.extern.dto.DataSeason;
 import com.project.cinetrack.domain.extern.dto.DataSerie;
 import com.project.cinetrack.domain.media.dto.DataRegisterMedia;
+import com.project.cinetrack.domain.media.dto.SerieDetailsResponse;
 import com.project.cinetrack.domain.media.repository.SerieRepository;
 import com.project.cinetrack.domain.media.serie.Episode;
 import com.project.cinetrack.domain.media.serie.Season;
@@ -38,52 +41,37 @@ public class SerieService {
 
 	public void registerSerie(DataRegisterMedia data) throws IOException, InterruptedException {
 		
-		System.out.println(data.title());
+		try {
+			
+		    String json = externService.searchOMDb(data.title(), "", "");
+		    DataSerie dataS = dataConverter.getData(json, DataSerie.class);	    
+		    Serie serie = new Serie(dataS);
+		    	    
+		    for (int seasonNumber = 1; seasonNumber <= serie.getTotalSeason(); seasonNumber++) {
+		    	
+		        String json2 = externService.searchOMDb(data.title(), ""+seasonNumber, "");	        
+		        DataSeason dataT = dataConverter.getData(json2, DataSeason.class);	        	      
+		        Season season = new Season(dataT, serie);	        	        
+		        List<DataEpisode> dataEpisodes = dataT.episodios();	        
+		        for (DataEpisode dataE : dataEpisodes) {
+		            Episode episode = new Episode(dataE, season);
+		            season.getEpisodes().add(episode);
+		        }
+		        serie.getSeasons().add(season);
+		    }
 
-	    String json = externService.searchOMDb(data.title(), "", "");
-	    
-	    System.out.println(json);
-	    
-	    DataSerie dataS = dataConverter.getData(json, DataSerie.class);
-	    
-	    System.out.println("dataSerie: "+dataS);
-	    
-	    Serie serie = new Serie(dataS);
-	    	    
-	    System.out.println("serie: "+dataS);
+		    serieRepository.save(serie); 
+			
+		}catch(Exception e) {
+			System.out.println("Serie nao encontrada");
+		}
+	}
+	
+	public Page<SerieDetailsResponse> listaSerie(Pageable pageable) {
+		
+	    var series = serieRepository.findAll(pageable).map(SerieDetailsResponse::new);
 
-	    for (int seasonNumber = 1; seasonNumber <= serie.getTotalSeason(); seasonNumber++) {
-	    	
-		    System.out.println("entrou aqui");
-
-	    	
-	        String json2 = externService.searchOMDb(data.title(), ""+seasonNumber, "");
-	        
-	        System.out.println(json2);
-	        
-	        DataSeason dataT = dataConverter.getData(json2, DataSeason.class);
-	        
-	        System.out.println(dataT);
-	        
-	        Season season = new Season(dataT, serie);
-	        
-	        System.out.println(season);
-	        
-	        List<DataEpisode> dataEpisodes = dataT.episodios();
-	        
-	        System.out.println("6");
-	        
-	        for (DataEpisode dataE : dataEpisodes) {
-	        	System.out.println(dataE);
-	            Episode episode = new Episode(dataE, season);
-	            season.getEpisodes().add(episode);
-	        }
-	        
-	        serie.getSeasons().add(season);
-	    }
-
-	    serieRepository.save(serie);
-	    
+	    return series;
 	}
 
 }

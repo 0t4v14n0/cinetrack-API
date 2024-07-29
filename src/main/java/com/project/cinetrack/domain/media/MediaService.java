@@ -3,6 +3,8 @@ package com.project.cinetrack.domain.media;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.project.cinetrack.domain.media.dto.DataRegisterMedia;
@@ -55,7 +57,6 @@ public class MediaService {
     
     public void registerMedia(DataRegisterMedia data) {
         if ("1".equals(data.media())) {
-            System.out.println("chegou aqui 2");
             try {
 				serieService.registerSerie(data);
 			} catch (Exception e) {
@@ -65,5 +66,12 @@ public class MediaService {
             movieService.registerMovie();
         }
     }
+
+	public Page<SerieDetailsResponse> listaSerie(Pageable pageable) {
+		
+	    var series = serieService.listaSerie(pageable);
+
+	    return series;
+	}
 
 }

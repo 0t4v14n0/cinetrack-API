@@ -3,6 +3,9 @@ package com.project.cinetrack.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,12 +49,21 @@ public class MediaController {
         }
     }
 	
+	@GetMapping("/serie")
+	public ResponseEntity<Page<SerieDetailsResponse>> listMedia(@PageableDefault(size = 10,
+															 sort = {"title"}
+															 ) Pageable pageable){
+		var page = mediaService.listaSerie(pageable);
+		
+		return ResponseEntity.ok(page);
+		
+	}
+	
 	@PostMapping
 	@Transactional
 	public ResponseEntity<?> registerMedia(@RequestBody @Valid DataRegisterMedia data){
 		try {
 			
-    		System.out.println("chegou aqui 1");
 			mediaService.registerMedia(data);
 			
 			return ResponseEntity.ok("");	
