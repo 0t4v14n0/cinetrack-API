@@ -54,4 +54,8 @@ public class UserService {
 		return psswordEncrypted;
     }
 
+	public int getById(String user) {
+		return repository.getById(user);
+	}
+
 }

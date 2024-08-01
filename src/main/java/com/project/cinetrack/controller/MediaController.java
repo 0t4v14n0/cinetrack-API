@@ -51,8 +51,7 @@ public class MediaController {
 	
 	@GetMapping("/serie")
 	public ResponseEntity<Page<SerieDetailsResponse>> listMedia(@PageableDefault(size = 10,
-															 sort = {"title"}
-															 ) Pageable pageable){
+															 					 sort = {"title"}) Pageable pageable){
 		var page = mediaService.listaSerie(pageable);
 		
 		return ResponseEntity.ok(page);
@@ -64,8 +63,7 @@ public class MediaController {
 	public ResponseEntity<?> registerMedia(@RequestBody @Valid DataRegisterMedia data){
 		try {
 			
-			mediaService.registerMedia(data);
-			
+			mediaService.registerMedia(data);		
 			return ResponseEntity.ok("");	
 			
 		}catch(Exception e) {

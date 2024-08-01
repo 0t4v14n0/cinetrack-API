@@ -43,6 +43,10 @@ public class MediaService {
 
 	public SeasonDetailsResponse seasonDetails(String title, Integer season) {
 		
+		System.out.println(title);
+		
+		System.out.println(season);
+		
     	Season search = seasonService.searchSeason(title,season);
     	
     	return new SeasonDetailsResponse(search);

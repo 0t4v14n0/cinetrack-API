@@ -2,6 +2,8 @@ package com.project.cinetrack.domain.review;
 
 import java.time.LocalDateTime;
 
+import com.project.cinetrack.domain.review.dto.DataRegisterReview;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,9 +25,17 @@ public class Review {
     private String reviewText;
     private LocalDateTime createdAt;
     
-    public Review(){
-    	
-    }
+    public Review(){}
+
+	public Review(DataRegisterReview data, int user) {
+		this.userId = (long) user;
+		this.movieId = data.movieId();
+		this.seriesId = data.seriesId();
+		this.episodeId = data.episodeId();
+		this.rating = data.rating();
+		this.reviewText = data.reviewText();
+		this.createdAt = LocalDateTime.now();
+	}
 
 	public Long getId() {
 		return id;
