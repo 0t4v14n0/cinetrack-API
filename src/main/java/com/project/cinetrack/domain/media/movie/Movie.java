@@ -18,7 +18,7 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String year;
+    private int year;
     private String data;
     private double note;
     @Enumerated(EnumType.STRING)
@@ -34,7 +34,7 @@ public class Movie {
 
 	public Movie(DataMovie dataM) {
 		this.title = dataM.title();
-		this.year = dataM.year();
+		this.year = Integer.parseInt(dataM.year());
 		this.data = dataM.releaseDate();
 		this.note = Double.parseDouble(dataM.rating());
         try {
@@ -63,17 +63,17 @@ public class Movie {
 	public String getTitle() {
 		return title;
 	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getYear() {
+	
+	public int getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
+	public void setYear(int year) {
 		this.year = year;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getData() {
