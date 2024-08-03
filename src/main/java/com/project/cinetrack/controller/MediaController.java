@@ -34,24 +34,30 @@ public class MediaController {
 	public ResponseEntity<?> mediaDeteils(@RequestParam(name = "t", required = true) String title,
             							@RequestParam(name = "season", required = false) Integer season,
             							@RequestParam(name = "episode", required = false) Integer episode) throws IOException, InterruptedException{
-		
-        if (season == null && episode == null) {
-            SerieDetailsResponse response = mediaService.serieDetails(title);
-            return ResponseEntity.ok(response);
-        } else if (season != null && episode == null) {
-            SeasonDetailsResponse response = mediaService.seasonDetails(title, season);
-            return ResponseEntity.ok(response);
-        } else if (season != null && episode != null) {
-            EpisodeDetailsResponse response = mediaService.episodeDetails(title, season, episode);
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.badRequest().body("Invalid parameters");
-        }
+		try {
+			
+	        if (season == null && episode == null) {
+	            SerieDetailsResponse response = mediaService.serieDetails(title);
+	            return ResponseEntity.ok(response);
+	        } else if (season != null && episode == null) {
+	            SeasonDetailsResponse response = mediaService.seasonDetails(title, season);
+	            return ResponseEntity.ok(response);
+	        } else if (season != null && episode != null) {
+	            EpisodeDetailsResponse response = mediaService.episodeDetails(title, season, episode);
+	            return ResponseEntity.ok(response);
+	        } else {
+	            return ResponseEntity.badRequest().body("Invalid parameters");
+	        }
+			
+		}catch(Exception e) {
+			return ResponseEntity.badRequest().body("Invalid parameters");
+		}
+
     }
 	
 	@GetMapping("/serie")
 	public ResponseEntity<Page<SerieDetailsResponse>> listMedia(@PageableDefault(size = 10,
-															 					 sort = {"title"}) Pageable pageable){
+															 					 sort = {"title"}) Pageable pageable) {
 		var page = mediaService.listaSerie(pageable);
 		
 		return ResponseEntity.ok(page);
@@ -64,10 +70,10 @@ public class MediaController {
 		try {
 			
 			mediaService.registerMedia(data);		
-			return ResponseEntity.ok("");	
+			return ResponseEntity.ok(200);	
 			
 		}catch(Exception e) {
-			return null;
+			return ResponseEntity.badRequest().body("Media not found");
 		}
 	}
 

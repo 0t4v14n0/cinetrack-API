@@ -1,6 +1,5 @@
 package com.project.cinetrack.domain.media.service;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +38,9 @@ public class SerieService {
 		return serie1;
 	}
 
-	public void registerSerie(DataRegisterMedia data) throws IOException, InterruptedException {
+	public void registerSerie(DataRegisterMedia data){
 		
 		try {
-			
 		    String json = externService.searchOMDb(data.title(), "", "");
 		    DataSerie dataS = dataConverter.getData(json, DataSerie.class);	    
 		    Serie serie = new Serie(dataS);

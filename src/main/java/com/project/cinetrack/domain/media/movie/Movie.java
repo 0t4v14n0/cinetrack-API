@@ -1,8 +1,6 @@
 package com.project.cinetrack.domain.media.movie;
 
-import java.sql.Date;
-
-import com.project.cinetrack.domain.user.User;
+import com.project.cinetrack.domain.extern.dto.DataMovie;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,8 +8,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Table(name = "movie")
@@ -22,8 +18,8 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private Date year;
-    private Date data;
+    private String year;
+    private String data;
     private double note;
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -32,13 +28,29 @@ public class Movie {
     private String synopsis;
     private String poster;
     
-    @ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
-    
     public Movie() {
     	
     }
+
+	public Movie(DataMovie dataM) {
+		this.title = dataM.title();
+		this.year = dataM.year();
+		this.data = dataM.releaseDate();
+		this.note = Double.parseDouble(dataM.rating());
+        try {
+            if (dataM.gender() == null || dataM.gender().trim().isEmpty()) {
+                this.gender = Gender.UNKNOWN;
+            } else {
+                this.gender = Gender.fromString(dataM.gender().trim());
+            }
+        } catch (IllegalArgumentException e) {
+            this.gender = Gender.UNKNOWN;
+        }
+        this.director = dataM.director();
+        this.actor = dataM.actor();
+        this.synopsis = dataM.synopsis();
+        this.poster = dataM.poster();
+	}
 
 	public Long getId() {
 		return id;
@@ -56,19 +68,19 @@ public class Movie {
 		this.title = title;
 	}
 
-	public Date getYear() {
+	public String getYear() {
 		return year;
 	}
 
-	public void setYear(Date year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 

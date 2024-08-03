@@ -59,15 +59,14 @@ public class MediaService {
     	return new EpisodeDetailsResponse(search);
     }
     
-    public void registerMedia(DataRegisterMedia data) {
+    public void registerMedia(DataRegisterMedia data){
+    	
         if ("1".equals(data.media())) {
-            try {
-				serieService.registerSerie(data);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+        	
+			serieService.registerSerie(data);
+
         } else {
-            movieService.registerMovie();
+            movieService.registerMovie(data);
         }
     }
 
