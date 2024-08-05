@@ -20,6 +20,7 @@ public class Review {
     private Long userId ;
     private Long movieId;
     private Long seriesId;
+    private Long seasonId;
     private Long episodeId;
     private double rating;
     private String reviewText;
@@ -28,11 +29,33 @@ public class Review {
     public Review(){}
 
 	public Review(DataRegisterReview data, int user) {
-		this.userId = (long) user;
-		this.movieId = data.movieId();
-		this.seriesId = data.seriesId();
-		this.episodeId = data.episodeId();
-		this.rating = data.rating();
+		
+		this.userId = (long) user;	
+		try {
+			this.movieId = data.movieId();
+		}catch(Exception e) {
+			this.movieId = (long) 0;
+		}
+		try {	
+			this.seriesId = data.seriesId();	
+		}catch(Exception e) {
+			this.seriesId = (long) 0;
+		}
+		try {	
+			this.seasonId = data.seasonId();	
+		}catch(Exception e) {
+			this.seasonId = (long) 0;
+		}
+		try {	
+			this.episodeId = data.episodeId();
+		}catch(Exception e) {
+			this.episodeId = (long) 0;
+		}
+		try {
+			this.rating = data.rating();
+		}catch(Exception e) {
+			this.rating = 0;
+		}
 		this.reviewText = data.reviewText();
 		this.createdAt = LocalDateTime.now();
 	}
@@ -67,6 +90,14 @@ public class Review {
 
 	public void setSeriesId(Long seriesId) {
 		this.seriesId = seriesId;
+	}
+
+	public Long getSeasonId() {
+		return seasonId;
+	}
+
+	public void setSeasonId(Long seasonId) {
+		this.seasonId = seasonId;
 	}
 
 	public Long getEpisodeId() {

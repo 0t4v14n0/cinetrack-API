@@ -9,7 +9,7 @@ import com.project.cinetrack.domain.review.dto.DataReview;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long>{
-
+	
 	Page<DataReview> findUserid(Pageable pageable,Long id);
 
 }
