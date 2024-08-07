@@ -9,7 +9,8 @@ public record DataDeteilsReviewSerie(
 		Long seriesId,
 	    double rating,
 	    String reviewText,
-	    LocalDateTime createdAt) {
+	    LocalDateTime createdAt,
+	    LocalDateTime updatedAt) {
 	
 	public DataDeteilsReviewSerie(Review review) {
 		this(review.getId(),
@@ -17,7 +18,8 @@ public record DataDeteilsReviewSerie(
 			 review.getSeriesId(),
 			 review.getRating(),
 			 review.getReviewText(),
-			 review.getCreatedAt());
+			 review.getCreatedAt(),
+			 review.getUpdatedAt());
 	
 	}
 }

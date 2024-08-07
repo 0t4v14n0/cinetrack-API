@@ -54,8 +54,10 @@ public class UserService {
 		return psswordEncrypted;
     }
 
-	public int getById(String user) {
-		return repository.getById(user);
+	public Long getById(String user) {
+		return repository.findFirstByEmail(user)
+                .map(User::getId)
+                .orElse(null);
 	}
 
 }

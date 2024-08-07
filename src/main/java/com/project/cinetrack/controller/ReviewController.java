@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.cinetrack.domain.review.Review;
 import com.project.cinetrack.domain.review.ReviewService;
 import com.project.cinetrack.domain.review.dto.DataRegisterReview;
-import com.project.cinetrack.domain.review.dto.DataReview;
 import com.project.cinetrack.domain.review.dto.DataUpdateReview;
 
 @RestController
@@ -40,20 +39,19 @@ public class ReviewController {
 	@PutMapping
 	@Transactional
 	public ResponseEntity<?> updateReview(@RequestBody DataUpdateReview data){
-		return ResponseEntity.ok(reviewService.updateRview(data));
-		
+		return ResponseEntity.ok(reviewService.updateReview(data));
 	}
 	
-	@GetMapping
-	public ResponseEntity<Page<DataReview>> getAllReviewUser(@PageableDefault(size = 10,
-			 																  sort = {"id"}) Pageable pageable,
+	@GetMapping("/all")
+	public ResponseEntity<Page<Review>> getAllReviewUser(@PageableDefault(size = 10,
+			 															  sort = {"id"}) Pageable pageable,
 															Authentication authentication){
 		String user = (String) authentication.getName();
 		return ResponseEntity.ok(reviewService.getAllReviewUser(user,pageable));
 	}
 
-	@GetMapping
-	public ResponseEntity<Object> getReview(@RequestParam(name = "r", required = true) Long idReview){
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> getReview(@PathVariable(name = "id") Long idReview){
 		return ResponseEntity.ok(reviewService.getReview(idReview));
 	}
 	
@@ -63,6 +61,5 @@ public class ReviewController {
 	    reviewService.deleteReview(id, authentication.getName());
 	    return ResponseEntity.ok().body("Review disabled successfully");
 	}
-	
 	
 }

@@ -1,5 +1,7 @@
 package com.project.cinetrack.domain.user;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	DataDeteilsUser findDataDetailsByName(String name);
 	
 	UserDetails findByEmail(String Email);
-
-	int getById(String user);
+	
+	Optional<User> findFirstByEmail(String email);
 
 }

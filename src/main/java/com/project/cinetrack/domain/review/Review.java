@@ -4,61 +4,56 @@ import java.time.LocalDateTime;
 
 import com.project.cinetrack.domain.review.dto.DataRegisterReview;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Table(name = "Review")
+@Table(name = "review")
 @Entity
 public class Review {
 	
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId ;
+
+    @Column(name = "user_id")
+    private Long userId;
+
+    @Column(name = "movie_id")
     private Long movieId;
+
+    @Column(name = "serie_id")
     private Long seriesId;
+
+    @Column(name = "season_id")
     private Long seasonId;
+
+    @Column(name = "episode_id")
     private Long episodeId;
+
     private double rating;
+    
     private String reviewText;
+
     private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
     
     public Review(){}
 
-	public Review(DataRegisterReview data, int user) {
-		
-		this.userId = (long) user;	
-		try {
-			this.movieId = data.movieId();
-		}catch(Exception e) {
-			this.movieId = (long) 0;
-		}
-		try {	
-			this.seriesId = data.seriesId();	
-		}catch(Exception e) {
-			this.seriesId = (long) 0;
-		}
-		try {	
-			this.seasonId = data.seasonId();	
-		}catch(Exception e) {
-			this.seasonId = (long) 0;
-		}
-		try {	
-			this.episodeId = data.episodeId();
-		}catch(Exception e) {
-			this.episodeId = (long) 0;
-		}
-		try {
-			this.rating = data.rating();
-		}catch(Exception e) {
-			this.rating = 0;
-		}
-		this.reviewText = data.reviewText();
-		this.createdAt = LocalDateTime.now();
-	}
+    public Review(DataRegisterReview data, Long user) {
+        this.userId = user;
+        this.movieId = data.movieId() != null ? data.movieId() : null;
+        this.seriesId = data.seriesId() != null ? data.seriesId() : null;
+        this.seasonId = data.seasonId() != null ? data.seasonId() : null;
+        this.episodeId = data.episodeId() != null ? data.episodeId() : null;
+        this.rating = data.rating();
+        this.reviewText = data.reviewText() != null ? data.reviewText() : "";
+        this.createdAt = LocalDateTime.now();
+    }
 
 	public Long getId() {
 		return id;
@@ -132,4 +127,12 @@ public class Review {
 		this.createdAt = createdAt;
 	}
 
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
 }

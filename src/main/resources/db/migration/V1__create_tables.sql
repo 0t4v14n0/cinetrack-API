@@ -76,10 +76,12 @@ CREATE TABLE review (
     user_id BIGINT,
     movie_id BIGINT,
     serie_id BIGINT,
+    season_id BIGINT,
     episode_id BIGINT,
     rating DOUBLE,
     review_text TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (movie_id) REFERENCES movie(id),
     FOREIGN KEY (serie_id) REFERENCES serie(id),
@@ -87,18 +89,12 @@ CREATE TABLE review (
     INDEX idx_review_user (user_id)
 );
 
-CREATE TABLE favorite_series (
+CREATE TABLE favorite (
     user_id BIGINT,
     serie_id BIGINT,
-    PRIMARY KEY (user_id, serie_id),
-    FOREIGN KEY (user_id) REFERENCES user(id),
-    FOREIGN KEY (serie_id) REFERENCES serie(id)
-);
-
-CREATE TABLE favorite_movie (
-    user_id BIGINT,
     movie_id BIGINT,
-    PRIMARY KEY (user_id, movie_id),
+    PRIMARY KEY (user_id, serie_id, movie_id),
     FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (serie_id) REFERENCES serie(id),
     FOREIGN KEY (movie_id) REFERENCES movie(id)
 );
