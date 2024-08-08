@@ -13,5 +13,7 @@ public interface SerieRepository extends JpaRepository<Serie, Long>{
 	Serie findByTitle(String title);
 
     Page<Serie> findAll(Pageable pageable);
+
+	Serie findSerieById(Long serieId);
 	
 }

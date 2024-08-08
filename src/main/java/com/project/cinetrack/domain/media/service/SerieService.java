@@ -12,6 +12,7 @@ import com.project.cinetrack.domain.extern.ExternService;
 import com.project.cinetrack.domain.extern.dto.DataEpisode;
 import com.project.cinetrack.domain.extern.dto.DataSeason;
 import com.project.cinetrack.domain.extern.dto.DataSerie;
+import com.project.cinetrack.domain.favorite.dto.DataDetailsFavoriteSerie;
 import com.project.cinetrack.domain.media.dto.DataRegisterMedia;
 import com.project.cinetrack.domain.media.dto.SerieDetailsResponse;
 import com.project.cinetrack.domain.media.repository.SerieRepository;
@@ -34,6 +35,10 @@ public class SerieService {
 	public Serie searchSerie(String title) {
 		
 		Serie serie1 = serieRepository.findByTitle(title);
+		
+//		if(serie1 == null) {
+//			new DataRegisterMedia data ();
+//		}
 		
 		return serie1;
 	}
@@ -66,10 +71,11 @@ public class SerieService {
 	}
 	
 	public Page<SerieDetailsResponse> listaSerie(Pageable pageable) {
-		
-	    var series = serieRepository.findAll(pageable).map(SerieDetailsResponse::new);
+	    return serieRepository.findAll(pageable).map(SerieDetailsResponse::new);
+	}
 
-	    return series;
+	public Object pageSerieFavorite(DataDetailsFavoriteSerie dataDetailsFavoriteSerie) {
+		return new SerieDetailsResponse(serieRepository.findSerieById(dataDetailsFavoriteSerie.serieId()));
 	}
 
 }

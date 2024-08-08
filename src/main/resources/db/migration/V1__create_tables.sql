@@ -90,10 +90,10 @@ CREATE TABLE review (
 );
 
 CREATE TABLE favorite (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT,
     serie_id BIGINT,
     movie_id BIGINT,
-    PRIMARY KEY (user_id, serie_id, movie_id),
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (serie_id) REFERENCES serie(id),
     FOREIGN KEY (movie_id) REFERENCES movie(id)

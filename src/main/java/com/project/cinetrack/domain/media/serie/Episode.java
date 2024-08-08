@@ -10,8 +10,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Table(name = "episode")
 @Entity
+@Table(name = "episode")
 public class Episode {
 	
     @Id
