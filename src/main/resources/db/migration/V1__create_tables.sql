@@ -25,8 +25,6 @@ CREATE TABLE movie (
     actor VARCHAR(255),
     synopsis TEXT,
     poster VARCHAR(255),
-    user_id BIGINT,
-    FOREIGN KEY (user_id) REFERENCES user(id),
     INDEX idx_movie_title (title),
     INDEX idx_movie_gender (gender)
 );
@@ -44,8 +42,6 @@ CREATE TABLE serie (
     votes INT,
     runtime INT,
     poster VARCHAR(255),
-    user_id BIGINT,
-    FOREIGN KEY (user_id) REFERENCES user(id),
     INDEX idx_serie_title (title),
     INDEX idx_serie_gender (gender)
 );
