@@ -1,5 +1,7 @@
 package com.project.cinetrack.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -20,29 +22,41 @@ import com.project.cinetrack.domain.favorite.dto.DataRegisterFavorite;
 @RequestMapping("/favorite")
 public class FavoriteController {
 	
+	@Autowired
 	private FavoriteService favoriteService;
 	
 	@PostMapping
     @Transactional
     public ResponseEntity<?> registerFavorite(@RequestBody DataRegisterFavorite data,
     													   Authentication authentication){
-		System.out.println(data);
-		System.out.println(authentication.getName());
-		String name =authentication.getName();
-		return ResponseEntity.ok(favoriteService.registerFavorite(data,name));
+		return ResponseEntity.ok(favoriteService.registerFavorite(data,authentication.getName()));
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> getFavorite(@PageableDefault(size = 10,
+	public ResponseEntity<Page<?>> getFavorite(@PageableDefault(size = 10,
 			  											  sort = {"id"}) Pageable pageable,
 													                     Authentication authentication){
-		System.out.println(authentication.getName());
 		return ResponseEntity.ok(favoriteService.getFavorites(pageable,authentication.getName()));
+	}
+	
+	@GetMapping("/serie")
+	public ResponseEntity<Object> getFavoriteSerie(@PageableDefault(size = 10,
+			  											       sort = {"id"}) Pageable pageable,
+													                     Authentication authentication){
+		return ResponseEntity.ok(favoriteService.getFavoritesSerie(pageable,authentication.getName()));
+	}
+	
+	@GetMapping("/movie")
+	public ResponseEntity<Object> getFavoriteMovie(@PageableDefault(size = 10,
+			  											       sort = {"id"}) Pageable pageable,
+													                     Authentication authentication){
+		return ResponseEntity.ok(favoriteService.getFavoritesMovie(pageable,authentication.getName()));
 	}
 	
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> deleteFavorite(@PathVariable Long id, Authentication authentication){
-		return favoriteService.deleteFavorite(id,authentication.getName());
+		favoriteService.deleteFavorite(id,authentication.getName());
+		return ResponseEntity.ok().body("Favorite disabled successfully");
 	}
 }

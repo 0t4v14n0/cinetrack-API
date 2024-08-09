@@ -10,4 +10,12 @@ public record DataDetailsFavoriteMovie(Long id,
 		this(favorite.getId(),favorite.getMovieId(),favorite.getUserId());
 	}
 
+	public DataDetailsFavoriteMovie(DataDetailsFavorite favorite) {
+		this(favorite.id(),favorite.movieId(),favorite.userId());
+	}
+
+	public DataDetailsFavoriteMovie(DataDetailsFavoriteMovie favorite) {
+		this(favorite.id(),favorite.movieId(),favorite.userId());
+	}
+
 }

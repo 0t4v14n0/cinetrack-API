@@ -2,6 +2,7 @@ package com.project.cinetrack.domain.favorite;
 
 import com.project.cinetrack.domain.favorite.dto.DataRegisterFavorite;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,16 +16,19 @@ public class Favorite {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(name = "user_id")
 	private Long userId;
+	@Column(name = "serie_id")
 	private Long serieId;
+	@Column(name = "movie_id")
 	private Long movieId;
 	
 	public Favorite() {}
 	
 	public Favorite(DataRegisterFavorite data, Long byId) {
-		this.userId = byId != null ? byId : 0;
-		this.serieId = data.serieId() != null ? this.serieId : 0;
-		this.movieId = data.movieId() != null ? this.movieId : 0;
+		this.userId = byId;
+		this.serieId = data.serieId();
+		this.movieId = data.movieId();
 	}
 
 	public Long getId() {
