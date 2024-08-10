@@ -18,28 +18,19 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "user_id")
     private Long userId;
-
     @Column(name = "movie_id")
     private Long movieId;
-
     @Column(name = "serie_id")
     private Long seriesId;
-
     @Column(name = "season_id")
     private Long seasonId;
-
     @Column(name = "episode_id")
     private Long episodeId;
-
     private double rating;
-    
     private String reviewText;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
     
     public Review(){}

@@ -85,6 +85,16 @@ CREATE TABLE review (
     INDEX idx_review_user (user_id)
 );
 
+CREATE TABLE review_likes (
+    user_id BIGINT,
+    review_id BIGINT,
+    PRIMARY KEY (user_id, review_id),
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (review_id) REFERENCES review(id),
+    INDEX idx_review_likes_user (user_id),
+    INDEX idx_review_likes_review (review_id)
+);
+
 CREATE TABLE favorite (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT,
@@ -93,4 +103,16 @@ CREATE TABLE favorite (
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (serie_id) REFERENCES serie(id),
     FOREIGN KEY (movie_id) REFERENCES movie(id)
+);
+
+CREATE TABLE friends (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user1 BIGINT NOT NULL,
+    user2 BIGINT NOT NULL,
+    status ENUM('INVITED', 'RECUSED','ACCEPTED', 'BLOCKED'),
+    invited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_user1 FOREIGN KEY (user1) REFERENCES user(id) ON DELETE CASCADE,
+    CONSTRAINT fk_user2 FOREIGN KEY (user2) REFERENCES user(id) ON DELETE CASCADE,
+    CONSTRAINT unique_users_pair UNIQUE (user1, user2)
 );
