@@ -19,7 +19,7 @@
 </ol>
 
 <h1>Diagrama do Banco de Dados</h1>
-<h1><img id = "diagrama" src="src/main/resources/static/images/diagram.png" alt="Diagrama do Banco de Dados" width="700" height="500"></h1>
+<h1><img id = "diagrama" src="src/main/resources/static/images/diagram.png" alt="Diagrama do Banco de Dados" width="743" height="719"></h1>
 
 <h1>Endpoints</h1>
-<h1><img id = "diagrama" src="src/main/resources/static/images/endpoint.png" alt="Diagrama do Banco de Dados" width="200" height="500"></h1>
+<h1><img id = "diagrama" src="src/main/resources/static/images/endpoint.png" alt="Diagrama do Banco de Dados" width="410" height="686"></h1>
