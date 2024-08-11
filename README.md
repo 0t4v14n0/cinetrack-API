@@ -18,8 +18,9 @@
 	<li>Chat de conversas entre amigos</li>
 </ol>
 
+
 <h1>Diagrama do Banco de Dados</h1>
-<h1><img id = "diagrama" src="src/main/resources/static/images/diagrama.png" alt="Diagrama do Banco de Dados" width="800" height="600"></h1>
+<h1><img id = "diagrama" src="src/main/resources/static/images/diagram.png" alt="Diagrama do Banco de Dados" width="800" height="600"></h1>
 
 <h1>Endpoints</h1>
 <h1><img id = "diagrama" src="src/main/resources/static/images/endpoints.png" alt="Diagrama do Banco de Dados" width="200" height="500"></h1>
