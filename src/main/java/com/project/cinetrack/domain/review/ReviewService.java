@@ -71,7 +71,6 @@ public class ReviewService {
 				review.setReviewText(data.reviewText());
 				review.setUpdatedAt(LocalDateTime.now());
 				saveRepository(review);
-				System.out.println(review);
 				return new DataDeteilsReviewSerie(review);
 				
 			}else {	

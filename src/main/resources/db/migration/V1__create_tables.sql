@@ -106,13 +106,31 @@ CREATE TABLE favorite (
 );
 
 CREATE TABLE friends (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    user1 BIGINT NOT NULL,
-    user2 BIGINT NOT NULL,
+    user1_id BIGINT NOT NULL,
+    user2_id BIGINT NOT NULL,
     status ENUM('INVITED', 'RECUSED','ACCEPTED', 'BLOCKED'),
-    invited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_user1 FOREIGN KEY (user1) REFERENCES user(id) ON DELETE CASCADE,
-    CONSTRAINT fk_user2 FOREIGN KEY (user2) REFERENCES user(id) ON DELETE CASCADE,
-    CONSTRAINT unique_users_pair UNIQUE (user1, user2)
+    invited_at DATETIME,
+    status_at DATETIME,
+    PRIMARY KEY (user1_id, user2_id),
+    FOREIGN KEY (user1_id) REFERENCES user(id),
+    FOREIGN KEY (user2_id) REFERENCES user(id)
+);
+
+CREATE TABLE chat (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user1_id BIGINT NOT NULL,
+    user2_id BIGINT NOT NULL,
+    created_at DATETIME,
+    FOREIGN KEY (user1_id) REFERENCES user(id),
+    FOREIGN KEY (user2_id) REFERENCES user(id)
+);
+
+CREATE TABLE message (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    sender_id BIGINT NOT NULL,
+    chat_id BIGINT NOT NULL,
+    content TEXT,
+    timestamp DATETIME,
+    FOREIGN KEY (sender_id) REFERENCES user(id),
+    FOREIGN KEY (chat_id) REFERENCES chat(id)
 );

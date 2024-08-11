@@ -1,54 +1,35 @@
 package com.project.cinetrack.domain.review.likes;
 
 import java.io.Serializable;
-import java.util.Objects;
 
-import com.project.cinetrack.domain.review.Review;
-import com.project.cinetrack.domain.user.User;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Embeddable
 public class ReviewLikesId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "review_id")
+    private Long reviewId;
 
-    @ManyToOne
-    @JoinColumn(name = "review_id")
-    private Review review;
+    @Column(name = "user_id")
+    private Long userId;
 
-	public User getUser() {
-		return user;
+	public Long getReviewId() {
+		return reviewId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setReviewId(Long reviewId) {
+		this.reviewId = reviewId;
 	}
 
-	public Review getReview() {
-		return review;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setReview(Review review) {
-		this.review = review;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-	
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ReviewLikesId that = (ReviewLikesId) o;
-        return user.equals(that.user) && review.equals(that.review);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(user, review);
-    }
 }
