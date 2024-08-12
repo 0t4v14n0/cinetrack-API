@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.cinetrack.domain.review.likes.ReviewLikeService;
+import com.project.cinetrack.domain.review.likes.dto.DataGetLikeReview;
+import com.project.cinetrack.domain.review.likes.dto.DataLikeReview;
 
 @RestController
 @RequestMapping("/reviewlikes")
@@ -33,11 +35,10 @@ public class ReviewLikeController {
 		return ResponseEntity.ok().body("UnLike");
     }
     
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getLikeReview(@RequestBody DataLikeReview data){
-		return ResponseEntity.ok(reviewLikeService.getLikeReview(data.reviewId()));
+    @GetMapping
+    public ResponseEntity<DataGetLikeReview> getLikeReview(@RequestBody DataLikeReview data){
+    	System.out.println(data.reviewId());
+		return ResponseEntity.ok(new DataGetLikeReview(data.reviewId(),reviewLikeService.getLikeReview(data.reviewId())));
     }
-    
-    
 
 }

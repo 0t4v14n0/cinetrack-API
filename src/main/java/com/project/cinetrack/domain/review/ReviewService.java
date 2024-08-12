@@ -58,6 +58,11 @@ public class ReviewService {
 		Review review = reviewRepository.getReferenceById(id);
 		return new DataDeteilsReviewSerie(review);
 	}
+	
+	public Review getReviewForLike(Long id) {
+		Review review = reviewRepository.getReferenceById(id);
+		return review;
+	}
 
 	public Object updateReview(DataUpdateReview data) {
 		

@@ -3,9 +3,9 @@ package com.project.cinetrack.domain.review.likes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.cinetrack.controller.DataLikeReview;
 import com.project.cinetrack.domain.review.Review;
 import com.project.cinetrack.domain.review.ReviewService;
+import com.project.cinetrack.domain.review.likes.dto.DataLikeReview;
 import com.project.cinetrack.domain.user.UserService;
 
 @Service
@@ -31,15 +31,16 @@ public class ReviewLikeService {
     }
     
     public Long getLikeReview(Long idReview) {
-		return reviewLikeRepository.countByReviewId(idReview);
+    	Long count = reviewLikeRepository.countByReviewId(idReview);
+    	System.out.println(count);
+		return count;
     }
-    
     
 	//code reduction
     
     private ReviewLikes findReviewLikes(DataLikeReview data, String name) {
     	
-        Review review = (Review) reviewService.getReview(data.reviewId());
+        Review review = reviewService.getReviewForLike(data.reviewId());
         
         if (review == null) {
             throw new IllegalArgumentException("Review not found");
