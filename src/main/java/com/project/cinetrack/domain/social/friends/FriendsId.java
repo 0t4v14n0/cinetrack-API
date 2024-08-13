@@ -3,15 +3,25 @@ package com.project.cinetrack.domain.social.friends;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class FriendsId implements Serializable {
-	
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
-	private static final long serialVersionUID = 1L;
-	
-	private Long user1Id;
+@Embeddable
+public class FriendsId implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    
+    @Column(name = "user1_id")
+    private Long user1Id;
+    @Column(name = "user2_id")
     private Long user2Id;
 
     public FriendsId() {}
+
+    public FriendsId(Long user1Id, Long user2Id) {
+        this.user1Id = user1Id;
+        this.user2Id = user2Id;
+    }
 
 	public Long getUser1Id() {
 		return user1Id;

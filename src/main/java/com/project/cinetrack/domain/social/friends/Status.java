@@ -5,5 +5,6 @@ public enum Status {
     INVITED,
     RECUSED, 
     ACCEPTED,
-    BLOCKED
+    BLOCKED,
+    UNLOCK
 }

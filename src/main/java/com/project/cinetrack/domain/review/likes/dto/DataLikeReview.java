@@ -1,3 +1,5 @@
 package com.project.cinetrack.domain.review.likes.dto;
 
-public record DataLikeReview(Long reviewId) {}
+import jakarta.validation.constraints.NotNull;
+
+public record DataLikeReview(@NotNull Long reviewId) {}
