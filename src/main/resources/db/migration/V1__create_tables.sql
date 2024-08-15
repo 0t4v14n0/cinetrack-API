@@ -109,6 +109,7 @@ CREATE TABLE friends (
     user1_id BIGINT NOT NULL,
     user2_id BIGINT NOT NULL,
     status ENUM('INVITED', 'RECUSED','ACCEPTED', 'BLOCKED'),
+    last_status BIGINT,
     invited_at DATETIME,
     status_at DATETIME,
     PRIMARY KEY (user1_id, user2_id),

@@ -13,6 +13,7 @@ public class FriendsId implements Serializable {
     
     @Column(name = "user1_id")
     private Long user1Id;
+    
     @Column(name = "user2_id")
     private Long user2Id;
 

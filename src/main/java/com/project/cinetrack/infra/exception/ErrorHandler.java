@@ -17,6 +17,11 @@ import jakarta.persistence.EntityNotFoundException;
 
 @ControllerAdvice
 public class ErrorHandler {
+	
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage()); // Retorna 400 Bad Request com a mensagem de erro
+    }
 
     @SuppressWarnings("rawtypes")
 	@ExceptionHandler(EntityNotFoundException.class)

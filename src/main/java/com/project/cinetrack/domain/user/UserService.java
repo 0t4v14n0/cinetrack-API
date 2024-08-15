@@ -49,6 +49,10 @@ public class UserService {
 		return (User) repository.findByEmail(name);
 	}
 	
+	public User findById(Long id) {
+		return repository.findUserById(id).get();
+	}
+	
     public String passwordCrypt(String password) {
     	String psswordEncrypted = passwordEncoder.encode(password);
 		return psswordEncrypted;
