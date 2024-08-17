@@ -10,11 +10,11 @@
 	<li>CRUD Review de serie/season/episode</li>
 	<li>CRUD Favoritos retornando formatado as series e filmes</li>
 	<li>Sistema de curtidas para reviews</li>
+	<li>Sistema de amigos</li>
 </ol>
 
 <h1>Proxima implementacoes</h1>
 <ol>
-	<li>Sistema de amigos</li>
 	<li>Chat de conversas entre amigos</li>
 </ol>
 
