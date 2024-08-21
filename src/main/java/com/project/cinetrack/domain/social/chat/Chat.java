@@ -3,6 +3,7 @@ package com.project.cinetrack.domain.social.chat;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.project.cinetrack.domain.social.chat.dto.DataSendMessage;
 import com.project.cinetrack.domain.user.User;
 
 import jakarta.persistence.Entity;
@@ -31,6 +32,12 @@ public class Chat {
     private List<Message> messages;
     private LocalDateTime createdAt;
     
+    public Chat() { }
+    
+	public Chat(DataSendMessage data, User byNome, User byId) {
+	
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -13,7 +13,6 @@ import com.project.cinetrack.domain.favorite.dto.DataDetailsFavorite;
 import com.project.cinetrack.domain.favorite.dto.DataDetailsFavoriteMovie;
 import com.project.cinetrack.domain.favorite.dto.DataDetailsFavoriteSerie;
 import com.project.cinetrack.domain.favorite.dto.DataRegisterFavorite;
-import com.project.cinetrack.domain.favorite.repository.FavoriteRepository;
 import com.project.cinetrack.domain.media.movie.MovieService;
 import com.project.cinetrack.domain.media.service.SerieService;
 import com.project.cinetrack.domain.user.UserService;

@@ -110,4 +110,8 @@ public class FriendsService {
 		friend.setStatusAt(LocalDateTime.now());
 		friendsRepository.save(friend);
 	}
+
+	public Friends findFriend(Long id, Long sender) {
+		return friendsRepository.findByUserIds(id, sender);
+	}
 }

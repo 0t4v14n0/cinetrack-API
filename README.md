@@ -11,11 +11,7 @@
 	<li>CRUD Favoritos retornando formatado as series e filmes</li>
 	<li>Sistema de curtidas para reviews</li>
 	<li>Sistema de amigos</li>
-</ol>
-
-<h1>Proxima implementacoes</h1>
-<ol>
-	<li>Chat de conversas entre amigos</li>
+	<li>Chat de conversas entre amigos em tempo real</li>
 </ol>
 
 <h1>Diagrama do Banco de Dados</h1>

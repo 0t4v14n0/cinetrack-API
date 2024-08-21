@@ -1,4 +1,4 @@
-package com.project.cinetrack.domain.favorite.repository;
+package com.project.cinetrack.domain.favorite;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.project.cinetrack.domain.favorite.Favorite;
 import com.project.cinetrack.domain.favorite.dto.DataDetailsFavorite;
 import com.project.cinetrack.domain.favorite.dto.DataDetailsFavoriteMovie;
 import com.project.cinetrack.domain.favorite.dto.DataDetailsFavoriteSerie;
