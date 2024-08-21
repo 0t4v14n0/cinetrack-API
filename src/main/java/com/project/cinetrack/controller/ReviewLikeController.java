@@ -14,8 +14,11 @@ import com.project.cinetrack.domain.review.likes.ReviewLikeService;
 import com.project.cinetrack.domain.review.likes.dto.DataGetLikeReview;
 import com.project.cinetrack.domain.review.likes.dto.DataLikeReview;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/reviewlikes")
+@SecurityRequirement(name = "bearer-key")
 public class ReviewLikeController {
 	
 	@Autowired

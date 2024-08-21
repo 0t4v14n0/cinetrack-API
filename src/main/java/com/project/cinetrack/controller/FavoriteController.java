@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.cinetrack.domain.favorite.FavoriteService;
 import com.project.cinetrack.domain.favorite.dto.DataRegisterFavorite;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/favorite")
+@SecurityRequirement(name = "bearer-key")
 public class FavoriteController {
 	
 	@Autowired

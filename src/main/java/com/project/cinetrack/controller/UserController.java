@@ -15,11 +15,13 @@ import com.project.cinetrack.domain.user.UserService;
 import com.project.cinetrack.domain.user.dto.DataDeteilsUser;
 import com.project.cinetrack.domain.user.dto.DataUpdateUser;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
+@SecurityRequirement(name = "bearer-key")
 public class UserController {
 	
 	@Autowired

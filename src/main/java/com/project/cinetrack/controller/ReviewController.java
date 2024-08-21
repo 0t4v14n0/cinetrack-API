@@ -21,8 +21,11 @@ import com.project.cinetrack.domain.review.ReviewService;
 import com.project.cinetrack.domain.review.dto.DataRegisterReview;
 import com.project.cinetrack.domain.review.dto.DataUpdateReview;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/review")
+@SecurityRequirement(name = "bearer-key")
 public class ReviewController {
 	
 	@Autowired

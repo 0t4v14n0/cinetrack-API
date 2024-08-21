@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.cinetrack.domain.social.friends.FriendsService;
 import com.project.cinetrack.domain.social.friends.dto.DataInvitedFriends;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/friends")
+@SecurityRequirement(name = "bearer-key")
 public class FriendsController {
 	
 	@Autowired

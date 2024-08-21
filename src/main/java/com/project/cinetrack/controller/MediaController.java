@@ -20,11 +20,13 @@ import com.project.cinetrack.domain.media.dto.EpisodeDetailsResponse;
 import com.project.cinetrack.domain.media.dto.SeasonDetailsResponse;
 import com.project.cinetrack.domain.media.dto.SerieDetailsResponse;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/media")
+@SecurityRequirement(name = "bearer-key")
 public class MediaController {
 	
 	@Autowired

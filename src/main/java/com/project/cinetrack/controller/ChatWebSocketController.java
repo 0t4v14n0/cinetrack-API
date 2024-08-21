@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import com.project.cinetrack.domain.social.chat.ChatService;
 import com.project.cinetrack.domain.social.chat.dto.DataSendMessage;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @Controller
+@SecurityRequirement(name = "bearer-key")
 public class ChatWebSocketController {
 
     @Autowired
@@ -18,10 +21,7 @@ public class ChatWebSocketController {
     @MessageMapping("/sendMessage")
     @SendToUser("/queue/messages")
     public DataSendMessage receiveMessage(DataSendMessage chatMessage, Authentication authentication) {
-
-        // persiste a mensagem e a envia ao destinatario
         chatService.handleIncomingMessage(chatMessage, authentication.getName());
-        
         return chatMessage;
     }
 }
